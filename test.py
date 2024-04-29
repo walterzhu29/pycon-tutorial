@@ -1,5 +1,6 @@
 import time
 import pika
+import pika.spec
 
 RABBITMQ_HOST = 'localhost'
 RABBITMQ_PORT = '5672'
@@ -17,27 +18,36 @@ channel = connection.channel()
 
 # ==================== produce message ====================
 
-# channel.queue_declare(queue='hello')
+# channel.queue_declare(
+#     queue='hello',
+#     # durable=True,
+#     )
 
 # msg = 'hello world!'
-# channel.basic_publish(exchange='', routing_key='hello', body=msg)
+# channel.basic_publish(
+#     exchange='', 
+#     routing_key='hello', 
+#     body=msg, 
+#     # properties=pika.BasicProperties(delivery_mode=pika.spec.PERSISTENT_DELIVERY_MODE),
+#     )
 # print(f' [x] Sent: {msg}')
 
-# # for i in range(1,20+1):
+for i in range(1,20+1):
 
-# #     msg = str(i)
-# #     channel.basic_publish(exchange='', routing_key='hello', body=msg)
-# #     print(f' [x] Sent: {msg}')
+    msg = str(i)
+    channel.basic_publish(exchange='', routing_key='hello', body=msg)
+    print(f' [x] Sent: {msg}')
 
-# connection.close()
+connection.close()
 
 
 # ==================== consume message [1] ====================
 
-# channel.queue_declare(queue='hello')
+# channel.queue_declare(queue='hello', durable=True)
 
 # method, properties, body = channel.basic_get(queue='hello')
 # print(f' [x] Received: {body.decode()}')
+# channel.basic_ack(method.delivery_tag)
 
 
 # ==================== consume message [2] ====================
