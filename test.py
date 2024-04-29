@@ -20,7 +20,7 @@ channel = connection.channel()
 
 # channel.queue_declare(
 #     queue='hello',
-#     # durable=True,
+#     durable=True,
 #     )
 
 # msg = 'hello world!'
@@ -28,17 +28,17 @@ channel = connection.channel()
 #     exchange='', 
 #     routing_key='hello', 
 #     body=msg, 
-#     # properties=pika.BasicProperties(delivery_mode=pika.spec.PERSISTENT_DELIVERY_MODE),
+#     properties=pika.BasicProperties(delivery_mode=pika.spec.PERSISTENT_DELIVERY_MODE),
 #     )
 # print(f' [x] Sent: {msg}')
 
-for i in range(1,20+1):
+# for i in range(1,20+1):
 
-    msg = str(i)
-    channel.basic_publish(exchange='', routing_key='hello', body=msg)
-    print(f' [x] Sent: {msg}')
+#     msg = str(i)
+#     channel.basic_publish(exchange='', routing_key='hello', body=msg)
+#     print(f' [x] Sent: {msg}')
 
-connection.close()
+# connection.close()
 
 
 # ==================== consume message [1] ====================
@@ -52,7 +52,7 @@ connection.close()
 
 # ==================== consume message [2] ====================
 
-# channel.queue_declare(queue='hello')
+# channel.queue_declare(queue='hello', durable=True)
 
 # def callback(ch, method, properties, body):
 
@@ -68,7 +68,7 @@ connection.close()
 #     print('Interrupted.')
 #     channel.stop_consuming()
 
-# connection.close()
+connection.close()
 
 
 # ==================== consume message [3] ====================
