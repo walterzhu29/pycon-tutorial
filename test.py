@@ -68,7 +68,7 @@ channel = connection.channel()
 #     print('Interrupted.')
 #     channel.stop_consuming()
 
-connection.close()
+# connection.close()
 
 
 # ==================== consume message [3] ====================
