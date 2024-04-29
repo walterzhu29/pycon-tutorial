@@ -75,6 +75,7 @@ channel = connection.channel()
 
 # channel.queue_declare(queue='hello')
 
+# if there is no msg in queue anymore, and channel.consume() will return All None after inactivity_timeout
 # for method, properties, body in channel.consume(queue='hello', inactivity_timeout=10):
 
 #     print(f" [x] Received {body.decode()}")
